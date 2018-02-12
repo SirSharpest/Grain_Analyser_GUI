@@ -1,0 +1,20 @@
+* Read me!
+This application is a simple and easy to use GUI for interacting with micto_CT data
+
+** Requirements and running:
+#+begin_src bash
+pip install [list below]
+python main.py
+#+end_src
+
+- pandas  
+- numpy  
+- matplotlib
+- seaborn 
+- scipy
+- ct_analysing_library  
+
+
+** Screenshot
+[[./images/screenshot.png]]
+
