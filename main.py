@@ -5,6 +5,7 @@ By Nathan Hughes
 """
 
 import sys
+sys.path.append("./model/")
 sys.path.append("./controller/")
 sys.path.append("./view/")
 from gui_controller import AppWindow

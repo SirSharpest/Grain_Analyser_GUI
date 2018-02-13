@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow,  QWidget, QPushButton, QAction, QFileDialog, QMessageBox
 from main_view import Ui_MainWindow
+from data_model import CTGUIData as data
 
 
 class AppWindow(QMainWindow):
@@ -8,6 +9,9 @@ class AppWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setup_view_functions()
+
+        # init some variables
+        self.data = None
         self.show()
 
     def setup_view_functions(self):
@@ -17,7 +21,8 @@ class AppWindow(QMainWindow):
 
     def grab_files(self):
         try:
-
+            self.data = data(self.ui.directory.text(),
+                             self.ui.rdb_rachis_yes.isChecked())
         except:
             QMessageBox.warning(self, "Finding Files Error",
                                 "Couldn't find files in given location")
