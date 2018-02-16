@@ -35,6 +35,13 @@
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
+            <item row="1" column="1">
+             <widget class="QRadioButton" name="rdb_rachis_yes">
+              <property name="text">
+               <string>Yes</string>
+              </property>
+             </widget>
+            </item>
             <item row="2" column="1">
              <widget class="QRadioButton" name="rdb_rachis_no">
               <property name="text">
@@ -55,28 +62,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Include Rachis data?</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QRadioButton" name="rdb_rachis_yes">
-              <property name="text">
-               <string>Yes</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QPushButton" name="btn_find_files">
-              <property name="text">
-               <string>Find Files</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
+            <item row="4" column="1">
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
                <spacer name="horizontalSpacer">
@@ -99,6 +85,27 @@
                </widget>
               </item>
              </layout>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Include Rachis data?</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="btn_find_files">
+              <property name="text">
+               <string>Find Files</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="btn_load_data">
+              <property name="text">
+               <string>Load Data</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
