@@ -1,15 +1,25 @@
 from PyQt5.QtWidgets import QMainWindow,  QWidget, QPushButton, QAction, QFileDialog, QMessageBox, QMenu
 from PyQt5 import QtGui
 from main_view import Ui_MainWindow
-from data_view import Ui_wdg_dataview
+from data_view import Ui_DataWindow
 from data_model import CTGUIData as data
+from pandas_model import PandasModel
+
+# this is a tmp import I think
+import pandas as pd
 
 
 class DataWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_wdg_dataview()
+        self.ui = Ui_DataWindow()
         self.ui.setupUi(self)
+        self.populate_table()
+
+    def populate_table(self):
+        df = pd.read_csv('/home/nathan/primdata.csv')
+        model = PandasModel(df)
+        self.ui.tbl_data.setModel(model)
 
 
 class AppWindow(QMainWindow):
