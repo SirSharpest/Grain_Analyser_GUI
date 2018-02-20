@@ -26,5 +26,5 @@ class Ui_DataWindow(object):
 
     def retranslateUi(self, DataWindow):
         _translate = QtCore.QCoreApplication.translate
-        DataWindow.setWindowTitle(_translate("DataWindow", "MainWindow"))
+        DataWindow.setWindowTitle(_translate("DataWindow", "Data View"))
 
