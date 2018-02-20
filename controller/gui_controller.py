@@ -38,6 +38,7 @@ class AppWindow(QMainWindow):
 
         # init some variables
         self.data = None
+        self.wdg_lst_files = None
         # init states
         self.setup_default_states()
         self.show()
@@ -76,13 +77,13 @@ class AppWindow(QMainWindow):
             sys.stderr(e)
 
     def set_files_list(self):
-        # get files from data
-        wdg_lst_files = WidgetList(self.ui.lst_files)
+        if self.wdg_lst_files:
+            self.wdg_lst_files = WidgetList(self.ui.lst_files)
         g, r = self.data.get_files()
-        wdg_lst_files.update(g)
+        self.wdg_lst_files.update(g)
 
     def save_file_dialog(self):
-        if not self.data:
+        if self.data:
             QMessageBox.warning(self, "No data", "Data hasn't been loaded")
             return
         try:
