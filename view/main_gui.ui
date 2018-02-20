@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>506</width>
-    <height>407</height>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_load">
          <attribute name="title">
@@ -125,13 +125,6 @@
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="2" column="0">
-             <widget class="QPushButton" name="ctn_clean">
-              <property name="text">
-               <string>Clean Data</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="btn_loadexpinfo">
               <property name="text">
@@ -183,6 +176,13 @@
               </property>
              </spacer>
             </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="ctn_clean">
+              <property name="text">
+               <string>Clean Data</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -191,6 +191,11 @@
          <attribute name="title">
           <string>Analysis</string>
          </attribute>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="layout_plots"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>

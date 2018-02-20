@@ -4,6 +4,7 @@ from main_view import Ui_MainWindow
 from data_view import Ui_DataWindow
 from data_model import CTGUIData as data
 from list_model import WidgetList
+from matplotlib_canvas_model import MyStaticMplCanvas, MyMplCanvas
 from pandas_model import PandasModel
 import sys
 
@@ -34,6 +35,7 @@ class AppWindow(QMainWindow):
         # init some variables
         self.data = None
         self.wdg_lst_files = None
+        self.setup_figure_canvas()
         # init states
         self.setup_default_states()
         self.show()
@@ -54,6 +56,12 @@ class AppWindow(QMainWindow):
         self.ui.btn_find_files.clicked.connect(self.search_for_files)
         self.ui.btn_load_data.clicked.connect(self.find_files)
         self.ui.btn_to_csv.clicked.connect(self.save_file_dialog)
+
+    def setup_figure_canvas(self):
+        sc = MyStaticMplCanvas(
+            self.ui.tab_analysis, width=5, height=4, dpi=100)
+        l = self.ui.layout_plots
+        l.addWidget(sc)
 
     def view_data(self):
         self.data_view = DataWindow(self.data.get_data())
