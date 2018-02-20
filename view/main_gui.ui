@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
+    <width>506</width>
     <height>407</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_load">
          <attribute name="title">
@@ -38,14 +38,14 @@
             <item row="1" column="1">
              <widget class="QRadioButton" name="rdb_rachis_yes">
               <property name="text">
-               <string>Yes</string>
+               <string>&amp;Yes</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
              <widget class="QRadioButton" name="rdb_rachis_no">
               <property name="text">
-               <string>No</string>
+               <string>&amp;No</string>
               </property>
              </widget>
             </item>
@@ -204,13 +204,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>501</width>
-     <height>14</height>
+     <width>506</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Fi&amp;le</string>
     </property>
     <addaction name="actionSave_Data"/>
     <addaction name="actionQuit"/>
@@ -226,17 +226,17 @@
   </widget>
   <action name="actionView_Data_Frame">
    <property name="text">
-    <string>View Data Frame</string>
+    <string>&amp;View Data Frame</string>
    </property>
   </action>
   <action name="actionSave_Data">
    <property name="text">
-    <string>Save Data</string>
+    <string>&amp;Save Data</string>
    </property>
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
   </action>
  </widget>

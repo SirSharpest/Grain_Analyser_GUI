@@ -12,19 +12,14 @@ import pandas as pd
 
 
 class DataWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, df):
         super().__init__()
         self.ui = Ui_DataWindow()
         self.ui.setupUi(self)
-        self.populate_table()
+        self.populate_table(df)
 
-    def populate_table(self):
-        # TODO Replace with actual code
-        df = pd.read_csv('/home/nathan/primdata.csv')
-        # Add sorting properly
-        df = df.sort_values(by=['volume'])
-        model = PandasModel(df)
-        self.ui.tbl_data.setModel(model)
+    def populate_table(self, df):
+        model = PandasModel(self.ui.tbl_data, df)
 
 
 class AppWindow(QMainWindow):
@@ -61,7 +56,7 @@ class AppWindow(QMainWindow):
         self.ui.btn_to_csv.clicked.connect(self.save_file_dialog)
 
     def view_data(self):
-        self.data_view = DataWindow()
+        self.data_view = DataWindow(self.data.get_data())
         self.data_view.show()
 
     def find_files(self):
@@ -74,16 +69,16 @@ class AppWindow(QMainWindow):
         except TypeError as e:
             QMessageBox.warning(self, "Finding Files Error",
                                 "Couldn't find files in given location")
-            sys.stderr(e)
+            sys.stderr.write(e)
 
     def set_files_list(self):
-        if self.wdg_lst_files:
+        if self.wdg_lst_files is None:
             self.wdg_lst_files = WidgetList(self.ui.lst_files)
         g, r = self.data.get_files()
         self.wdg_lst_files.update(g)
 
     def save_file_dialog(self):
-        if self.data:
+        if self.data is None:
             QMessageBox.warning(self, "No data", "Data hasn't been loaded")
             return
         try:
@@ -99,7 +94,7 @@ class AppWindow(QMainWindow):
         except TypeError as e:
             QMessageBox.warning(self, "Bad Parameters!",
                                 "Invalid save options")
-            sys.stderr(e)
+            sys.stderr.write(e)
 
     def search_for_files(self):
         self.folder = str(QFileDialog.getExistingDirectory(

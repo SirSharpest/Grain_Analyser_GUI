@@ -16,8 +16,10 @@ class Ui_DataWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.tbl_data = QtWidgets.QTableView(self.centralwidget)
+        self.tbl_data = QtWidgets.QTableWidget(self.centralwidget)
         self.tbl_data.setObjectName("tbl_data")
+        self.tbl_data.setColumnCount(0)
+        self.tbl_data.setRowCount(0)
         self.gridLayout.addWidget(self.tbl_data, 0, 0, 1, 1)
         DataWindow.setCentralWidget(self.centralwidget)
 

@@ -15,4 +15,4 @@ class CTGUIData(CTData):
         super().__init__(folder, rachis)
 
     def download_data(self, save_location):
-        self.df.to_csv(save_location)
+        self.get_data().to_csv(save_location)

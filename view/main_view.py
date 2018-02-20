@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(501, 407)
+        MainWindow.resize(506, 407)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -112,7 +112,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 501, 14))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 506, 30))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
@@ -132,14 +132,14 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuView.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.master_tab.setCurrentIndex(2)
+        self.master_tab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "CT-Seed Analyser 3000"))
-        self.rdb_rachis_yes.setText(_translate("MainWindow", "Yes"))
-        self.rdb_rachis_no.setText(_translate("MainWindow", "No"))
+        self.rdb_rachis_yes.setText(_translate("MainWindow", "&Yes"))
+        self.rdb_rachis_no.setText(_translate("MainWindow", "&No"))
         self.btn_to_csv.setText(_translate("MainWindow", "Download to CSV"))
         self.label.setText(_translate("MainWindow", "Include Rachis data?"))
         self.btn_find_files.setText(_translate("MainWindow", "Find Files"))
@@ -152,9 +152,9 @@ class Ui_MainWindow(object):
         self.chk_small.setText(_translate("MainWindow", "Remove Small Seeds"))
         self.master_tab.setTabText(self.master_tab.indexOf(self.tab_preprocess), _translate("MainWindow", "Pre-Processing"))
         self.master_tab.setTabText(self.master_tab.indexOf(self.tab_analysis), _translate("MainWindow", "Analysis"))
-        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuFile.setTitle(_translate("MainWindow", "Fi&le"))
         self.menuView.setTitle(_translate("MainWindow", "View"))
-        self.actionView_Data_Frame.setText(_translate("MainWindow", "View Data Frame"))
-        self.actionSave_Data.setText(_translate("MainWindow", "Save Data"))
-        self.actionQuit.setText(_translate("MainWindow", "Quit"))
+        self.actionView_Data_Frame.setText(_translate("MainWindow", "&View Data Frame"))
+        self.actionSave_Data.setText(_translate("MainWindow", "&Save Data"))
+        self.actionQuit.setText(_translate("MainWindow", "&Quit"))
 

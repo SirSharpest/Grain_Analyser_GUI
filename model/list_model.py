@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QListWidgetItem, QListWidget
+from PyQt5.QtWidgets import QListWidget
 
 
 class WidgetList():
