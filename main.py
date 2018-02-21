@@ -13,7 +13,6 @@ from gui_controller import AppWindow
 from PyQt5.QtWidgets import QApplication
 
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     w = AppWindow()
