@@ -3,9 +3,9 @@ from matplotlib_canvas_view import MatplotlibCanvasView as view
 
 
 class AnalysisWindow():
-    def __init__(self, ui):
+    def __init__(self, window, ui):
         self.ui = ui
-        self.data = None
+        self.window = window
         self.view = None
 
     def setup_default_states(self):
@@ -14,14 +14,14 @@ class AnalysisWindow():
     def enable(self, data):
         self.update_data(data)
         self.view = view(
-            self.data.get_data(),
+            self.window.get_data().get_data(),
             self.ui.tab_analysis,
             self.ui.layout_plots,
             self.ui.layout_plot_settings)
         self.setup_figure_canvas()
 
     def update_data(self, data):
-        self.data = data
+        self.window.set_data(data)
 
     def setup_figure_canvas(self):
         for k, v in self.view.get_radio_buttons().items():
@@ -39,7 +39,7 @@ class AnalysisWindow():
         for i in reversed(range(self.ui.layout_plots.count())):
             self.ui.layout_plots.itemAt(i).widget().deleteLater()
         self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
-                                    self.data.get_data(),
+                                    self.window.get_data().get_data(),
                                     width=5,
                                     height=4,
                                     dpi=100,
