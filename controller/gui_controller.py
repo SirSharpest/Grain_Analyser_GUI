@@ -24,9 +24,9 @@ class AppWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.analysis_controller = AnalysisWindow(self.ui)
         self.setup_menu_functions()
         self.setup_view_functions()
+        self.analysis_controller = AnalysisWindow(self.ui)
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
 
         # init some variables
@@ -69,7 +69,7 @@ class AppWindow(QMainWindow):
                 self.ui.btn_to_csv.setEnabled(True)
                 self.ui.tab_preprocess.setEnabled(True)
                 self.ui.tab_analysis.setEnabled(True)
-                self.analysis_controller.enable()
+                self.analysis_controller.enable(self.data)
                 self.set_files_list()
         except TypeError as e:
             QMessageBox.warning(self, "Finding Files Error",

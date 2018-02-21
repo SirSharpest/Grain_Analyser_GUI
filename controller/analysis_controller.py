@@ -1,5 +1,5 @@
 from matplotlib_canvas_model import MyStaticMplCanvas
-from matplotlib_canvas_view import MatplotlibCanvasView as analysis_view
+from matplotlib_canvas_view import MatplotlibCanvasView as view
 
 
 class AnalysisWindow():
@@ -11,22 +11,25 @@ class AnalysisWindow():
     def setup_default_states(self):
         pass
 
-    def enable(self):
-        self.view = analysis_view(
+    def enable(self, data):
+        self.update_data(data)
+        self.view = view(
             self.data.get_data(),
             self.ui.tab_analysis,
             self.ui.layout_plots,
             self.ui.layout_plot_settings)
-
         self.setup_figure_canvas()
 
+    def update_data(self, data):
+        self.data = data
+
     def setup_figure_canvas(self):
-        for k, v in self.analysis_view.get_radio_buttons().items():
+        for k, v in self.view.get_radio_buttons().items():
             v.toggled.connect(self.make_canvas_plot)
         self.make_canvas_plot()
 
     def find_clicked_button(self):
-        for k, v in self.analysis_view.get_radio_buttons().items():
+        for k, v in self.view.get_radio_buttons().items():
             if v.isChecked():
                 return v.column
         return 'volume'
