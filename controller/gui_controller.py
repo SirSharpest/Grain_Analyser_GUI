@@ -2,14 +2,18 @@ from PyQt5.QtWidgets import QMainWindow,  QWidget, QPushButton, QAction, QFileDi
 from PyQt5 import QtGui
 from main_view import Ui_MainWindow
 from data_view import Ui_DataWindow
+from matplotlib_canvas_view import MatplotlibCanvasView as analysis_view
 from data_model import CTGUIData as data
 from list_model import WidgetList
-from matplotlib_canvas_model import MyStaticMplCanvas, MyMplCanvas
 from pandas_model import PandasModel
+from matplotlib_canvas_model import MyStaticMplCanvas
+# May need to rearrange import order
 import sys
 
-# this is a tmp import I think
-import pandas as pd
+"""
+Issues: When self.data changes/updates then analysis_view will be outdated
+
+"""
 
 
 class DataWindow(QMainWindow):
@@ -20,7 +24,7 @@ class DataWindow(QMainWindow):
         self.populate_table(df)
 
     def populate_table(self, df):
-        model = PandasModel(self.ui.tbl_data, df)
+        self.model = PandasModel(self.ui.tbl_data, df)
 
 
 class AppWindow(QMainWindow):
@@ -28,6 +32,7 @@ class AppWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.analysis_view = None
         self.setup_menu_functions()
         self.setup_view_functions()
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
@@ -35,7 +40,6 @@ class AppWindow(QMainWindow):
         # init some variables
         self.data = None
         self.wdg_lst_files = None
-        self.setup_figure_canvas()
         # init states
         self.setup_default_states()
         self.show()
@@ -51,6 +55,10 @@ class AppWindow(QMainWindow):
         self.ui.btn_to_csv.setEnabled(False)
         self.ui.rdb_rachis_yes.setChecked(True)
 
+        # Set the other tabs to disabled when no data is loaded
+        self.ui.tab_preprocess.setEnabled(False)
+        self.ui.tab_analysis.setEnabled(False)
+
     def setup_view_functions(self):
         # Load data page
         self.ui.btn_find_files.clicked.connect(self.search_for_files)
@@ -58,10 +66,29 @@ class AppWindow(QMainWindow):
         self.ui.btn_to_csv.clicked.connect(self.save_file_dialog)
 
     def setup_figure_canvas(self):
-        sc = MyStaticMplCanvas(
-            self.ui.tab_analysis, width=5, height=4, dpi=100)
-        l = self.ui.layout_plots
-        l.addWidget(sc)
+        for k, v in self.analysis_view.get_radio_buttons().items():
+            v.toggled.connect(self.make_canvas_plot)
+        self.make_canvas_plot()
+
+    def find_clicked_button(self):
+        for k, v in self.analysis_view.get_radio_buttons().items():
+            if v.isChecked():
+                return v.column
+        return 'volume'
+
+    def make_canvas_plot(self):
+        column = self.find_clicked_button()
+        for i in reversed(range(self.ui.layout_plots.count())):
+            self.ui.layout_plots.itemAt(i).widget().deleteLater()
+
+        self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
+                                    self.data.get_data(),
+                                    width=5,
+                                    height=4,
+                                    dpi=100,
+                                    column=column,
+                                    plot_type='histogram')
+        self.ui.layout_plots.addWidget(self.sc)
 
     def view_data(self):
         self.data_view = DataWindow(self.data.get_data())
@@ -73,6 +100,14 @@ class AppWindow(QMainWindow):
                              self.ui.rdb_rachis_yes.isChecked())
             if self.data:
                 self.ui.btn_to_csv.setEnabled(True)
+                self.ui.tab_preprocess.setEnabled(True)
+                self.ui.tab_analysis.setEnabled(True)
+                self.analysis_view = analysis_view(
+                    self.data.get_data(),
+                    self.ui.tab_analysis,
+                    self.ui.layout_plots,
+                    self.ui.layout_plot_settings)
+                self.setup_figure_canvas()
                 self.set_files_list()
         except TypeError as e:
             QMessageBox.warning(self, "Finding Files Error",

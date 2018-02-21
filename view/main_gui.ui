@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>412</height>
+    <width>722</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -192,8 +192,11 @@
           <string>Analysis</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <layout class="QGridLayout" name="layout_plots"/>
+          </item>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="layout_plot_settings"/>
           </item>
          </layout>
         </widget>
@@ -209,7 +212,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>506</width>
+     <width>722</width>
      <height>30</height>
     </rect>
    </property>
