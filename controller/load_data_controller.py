@@ -57,14 +57,18 @@ class FindFilesWindow():
             options = QFileDialog.Options()
             options |= QFileDialog.DontUseNativeDialog
             filename, _ = QFileDialog.getSaveFileName(
-                self, "Save Files", "", "CSV Files (*.csv)", options=options)
+                self.window,
+                "Save Files",
+                "",
+                "CSV Files (*.csv)",
+                options=options)
             if filename:
                 self.window.get_data().download_data(filename)
             else:
                 QMessageBox.warning(self.window, "Invalid Location",
                                     "Couldn't find the save location")
         except TypeError as e:
-            QMessageBox.warning(self, "Bad Parameters!",
+            QMessageBox.warning(self.window, "Bad Parameters!",
                                 "Invalid save options")
 
     def search_for_files(self):
