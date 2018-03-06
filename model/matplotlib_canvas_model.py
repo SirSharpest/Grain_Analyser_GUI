@@ -35,13 +35,18 @@ class MyMplCanvas(FigureCanvas):
 
 
 class MyStaticMplCanvas(MyMplCanvas):
-    """Simple canvas with a sine plot."""
+    """Basic plotting functionality"""
 
     def compute_initial_figure(self, axes, df):
-        if self.plot_type == 'histogram':
-            sns.distplot(df[self.column], ax=self.axes)
-            #= hist_func(df, self.column)
-        else:
-            t = arange(0.0, 3.0, 0.01)
-            s = sin(2 * pi * t)
-            self.axes.plot(t, s)
+        try:
+            if self.plot_type == 'histogram':
+                sns.distplot(df[self.column], ax=self.axes, kde=False)
+            else:
+                t = arange(0.0, 3.0, 0.01)
+                s = sin(2 * pi * t)
+                self.axes.plot(t, s)
+        except ValueError:
+            print('Column:\t{0} is giving problems'.format(self.column))
+            print('\nHelp! NaN Imma just make a volume plot\n')
+        except TypeError:
+            print('\nBad comparison types in column:\t{0}'.format(self.column))

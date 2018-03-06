@@ -1,4 +1,4 @@
-from ct_analysing_library.CTData import CTData
+from ct_analysing_library.ct_data import CTData
 
 
 class CTGUIData(CTData):

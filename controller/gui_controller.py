@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5 import QtGui
 from analysis_controller import AnalysisWindow
 from load_data_controller import FindFilesWindow
+from pre_processing_controller import PreProcessWindow
 from main_view import Ui_MainWindow
 from data_view import Ui_DataWindow
 from pandas_model import PandasModel
@@ -28,7 +29,7 @@ class AppWindow(QMainWindow):
         # Load in Controllers
         self.find_files_controller = FindFilesWindow(self, self.ui)
         self.analysis_controller = AnalysisWindow(self, self.ui)
-
+        self.pre_process_controller = PreProcessWindow(self, self.ui)
         # Set GUI icon for beautification
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
 

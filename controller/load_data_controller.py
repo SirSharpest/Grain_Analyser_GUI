@@ -8,6 +8,7 @@ class DataAlreadyLoaded(Exception):
 
 
 class FindFilesWindow():
+
     def __init__(self, window, ui):
         self.ui = ui
         self.window = window
