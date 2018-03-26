@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.10
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -76,7 +76,24 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.btn_loadexpinfo = QtWidgets.QPushButton(self.tab_preprocess)
         self.btn_loadexpinfo.setObjectName("btn_loadexpinfo")
-        self.gridLayout_3.addWidget(self.btn_loadexpinfo, 1, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.btn_loadexpinfo, 2, 0, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.chk_large = QtWidgets.QCheckBox(self.tab_preprocess)
+        self.chk_large.setObjectName("chk_large")
+        self.horizontalLayout.addWidget(self.chk_large)
+        self.chk_small = QtWidgets.QCheckBox(self.tab_preprocess)
+        self.chk_small.setObjectName("chk_small")
+        self.horizontalLayout.addWidget(self.chk_small)
+        self.gridLayout_3.addLayout(self.horizontalLayout, 3, 1, 1, 1)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_3.addItem(spacerItem1, 4, 1, 1, 1)
+        self.ctn_clean = QtWidgets.QPushButton(self.tab_preprocess)
+        self.ctn_clean.setObjectName("ctn_clean")
+        self.gridLayout_3.addWidget(self.ctn_clean, 3, 0, 1, 1)
+        self.btn_select_expinfo = QtWidgets.QPushButton(self.tab_preprocess)
+        self.btn_select_expinfo.setObjectName("btn_select_expinfo")
+        self.gridLayout_3.addWidget(self.btn_select_expinfo, 1, 0, 1, 1)
         self.expinfo = QtWidgets.QLineEdit(self.tab_preprocess)
         self.expinfo.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Ignored)
@@ -86,20 +103,6 @@ class Ui_MainWindow(object):
         self.expinfo.setSizePolicy(sizePolicy)
         self.expinfo.setObjectName("expinfo")
         self.gridLayout_3.addWidget(self.expinfo, 1, 1, 1, 1)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.chk_large = QtWidgets.QCheckBox(self.tab_preprocess)
-        self.chk_large.setObjectName("chk_large")
-        self.horizontalLayout.addWidget(self.chk_large)
-        self.chk_small = QtWidgets.QCheckBox(self.tab_preprocess)
-        self.chk_small.setObjectName("chk_small")
-        self.horizontalLayout.addWidget(self.chk_small)
-        self.gridLayout_3.addLayout(self.horizontalLayout, 2, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_3.addItem(spacerItem1, 3, 1, 1, 1)
-        self.ctn_clean = QtWidgets.QPushButton(self.tab_preprocess)
-        self.ctn_clean.setObjectName("ctn_clean")
-        self.gridLayout_3.addWidget(self.ctn_clean, 2, 0, 1, 1)
         self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
         self.master_tab.addTab(self.tab_preprocess, "")
         self.tab_analysis = QtWidgets.QWidget()
@@ -120,7 +123,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 30))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 23))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
@@ -140,7 +143,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuView.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.master_tab.setCurrentIndex(2)
+        self.master_tab.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -158,6 +161,7 @@ class Ui_MainWindow(object):
         self.chk_large.setText(_translate("MainWindow", "Remove Large seeds"))
         self.chk_small.setText(_translate("MainWindow", "Remove Small Seeds"))
         self.ctn_clean.setText(_translate("MainWindow", "Clean Data"))
+        self.btn_select_expinfo.setText(_translate("MainWindow", "Select Experiment info"))
         self.master_tab.setTabText(self.master_tab.indexOf(self.tab_preprocess), _translate("MainWindow", "Pre-Processing"))
         self.master_tab.setTabText(self.master_tab.indexOf(self.tab_analysis), _translate("MainWindow", "Analysis"))
         self.menuFile.setTitle(_translate("MainWindow", "Fi&le"))

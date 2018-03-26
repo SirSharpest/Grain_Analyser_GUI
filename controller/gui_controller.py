@@ -45,9 +45,6 @@ class AppWindow(QMainWindow):
         self.ui.actionQuit.triggered.connect(self.close)
         self.ui.actionView_Data_Frame.triggered.connect(self.view_data)
 
-        # FIX
-        # self.ui.actionSave_Data.triggered.connect(self.save_file_dialog)
-
     def setup_default_states(self):
         # Set the other tabs to disabled when no data is loaded
         self.ui.tab_preprocess.setEnabled(False)

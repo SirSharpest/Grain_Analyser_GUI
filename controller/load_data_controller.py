@@ -8,7 +8,6 @@ class DataAlreadyLoaded(Exception):
 
 
 class FindFilesWindow():
-
     def __init__(self, window, ui):
         self.ui = ui
         self.window = window
@@ -32,7 +31,6 @@ class FindFilesWindow():
         try:
             if self.window.get_data() is not None:
                 raise DataAlreadyLoaded
-
             self.window.set_data(CTGUIData(self.ui.directory.text(),
                                            self.ui.rdb_rachis_yes.isChecked()))
             if self.window.get_data():
