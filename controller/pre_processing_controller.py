@@ -11,9 +11,8 @@ class PreProcessWindow():
     def connect_view_functions(self):
         self.ui.btn_select_expinfo.clicked.connect(
             self.select_experimental_info)
-
-        # TODO Fix naming conventions in the UI forms
-        self.ui.btn_loadexpinfo.clicked.connect(self.load_experimental_data)
+        self.ui.btn_load_expinfo.clicked.connect(self.load_experimental_data)
+        self.ui.btn_clean.clicked.connect(self.clean_data)
 
     def select_experimental_info(self):
         options = QFileDialog.Options()
@@ -29,3 +28,14 @@ class PreProcessWindow():
         except (ValueError, NoDataFoundException):
             QMessageBox.warning(self.window, "Whoops",
                                 "That data is not matching with loaded data")
+
+    def clean_data(self):
+        remove_large = self.ui.chk_large.isChecked()
+        remove_small = self.ui.chk_small.isChecked()
+        # TODO add in features for this
+
+        self.window.get_data().fix_colnames()
+        self.window.get_data().clean_data()
+
+        QMessageBox.warning(self.window, "Success",
+                            "Data Cleaned")

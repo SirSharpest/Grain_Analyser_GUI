@@ -16,5 +16,3 @@ class CTGUIData(CTData):
 
     def download_data(self, save_location):
         self.get_data().to_csv(save_location)
-
-    def

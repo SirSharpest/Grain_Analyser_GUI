@@ -126,7 +126,7 @@
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="2" column="0">
-             <widget class="QPushButton" name="btn_loadexpinfo">
+             <widget class="QPushButton" name="btn_load_expinfo">
               <property name="text">
                <string>Load Experiment Info</string>
               </property>
