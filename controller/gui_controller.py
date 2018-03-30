@@ -29,6 +29,7 @@ class AppWindow(QMainWindow):
         # Load in Controllers
         self.find_files_controller = FindFilesWindow(self, self.ui)
         self.analysis_controller = AnalysisWindow(self, self.ui)
+        self.ui.master_tab.currentChanged.connect(self.update_analysis_view)
         self.pre_process_controller = PreProcessWindow(self, self.ui)
         # Set GUI icon for beautification
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
@@ -59,3 +60,10 @@ class AppWindow(QMainWindow):
 
     def set_data(self, data):
         self.data = data
+
+    def update_analysis_view(self, tab):
+        # tab 2 is the analysis window
+        if tab is not 2:
+            return 0
+        else:
+            self.analysis_controller.update_view(self.data)

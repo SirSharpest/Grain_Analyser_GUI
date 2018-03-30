@@ -20,7 +20,18 @@ class AnalysisWindow():
             self.ui.layout_plot_settings)
         self.setup_figure_canvas()
 
+    def update_view(self, data):
+        """
+        Attach this function to tab onclick
+        then when the data changes we can create a new view
+        with any changes to the columns!
+        """
+        for i in reversed(range(self.ui.layout_plot_settings.count())):
+            self.ui.layout_plot_settings.itemAt(i).widget().setParent(None)
+        self.enable(data)
+
     def update_data(self, data):
+
         self.window.set_data(data)
 
     def setup_figure_canvas(self):
