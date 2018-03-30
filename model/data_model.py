@@ -1,4 +1,4 @@
-from ct_analysing_library.ct_data import CTData
+from ct_analysing_library.ct_data import CTData, NoDataFoundException
 
 
 class CTGUIData(CTData):
@@ -16,3 +16,5 @@ class CTGUIData(CTData):
 
     def download_data(self, save_location):
         self.get_data().to_csv(save_location)
+
+    def

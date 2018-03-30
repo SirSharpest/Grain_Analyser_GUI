@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from ct_analysing_library.ct_data import NoDataFoundException
 
 
 class PreProcessWindow():
@@ -22,5 +23,9 @@ class PreProcessWindow():
         self.ui.expinfo.setText(info)
 
     def load_experimental_data(self):
-        finfo = self.ui.expinfo.text()
-        self.window.get_data().get_spike_info(finfo)
+        try:
+            finfo = self.ui.expinfo.text()
+            self.window.get_data().get_spike_info(finfo)
+        except (ValueError, NoDataFoundException):
+            QMessageBox.warning(self.window, "Whoops",
+                                "That data is not matching with loaded data")
