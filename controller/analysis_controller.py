@@ -7,11 +7,17 @@ class AnalysisWindow():
         self.ui = ui
         self.window = window
         self.view = None
+        self.plot_type = 'histogram'
+        self.ui.cb_graph_type.currentTextChanged.connect(self.set_graph_type)
+
+    def set_graph_type(self):
+        self.plot_type = str(self.ui.cb_graph_type.currentText()).lower()
+        self.make_canvas_plot(self.plot_type)
 
     def setup_default_states(self):
         pass
 
-    def enable(self, data):
+    def refresh(self, data):
         self.view = view(
             self.window.get_data().get_data(),
             self.ui.tab_analysis,
@@ -27,12 +33,12 @@ class AnalysisWindow():
         """
         for i in reversed(range(self.ui.layout_plot_settings.count())):
             self.ui.layout_plot_settings.itemAt(i).widget().setParent(None)
-        self.enable(data)
+        self.refresh(data)
 
     def setup_figure_canvas(self):
         for k, v in self.view.get_radio_buttons().items():
             v.toggled.connect(self.make_canvas_plot)
-        self.make_canvas_plot()
+        self.make_canvas_plot(self.plot_type)
 
     def find_clicked_button(self):
         for k, v in self.view.get_radio_buttons().items():
@@ -40,7 +46,7 @@ class AnalysisWindow():
                 return v.column
         return 'volume'
 
-    def make_canvas_plot(self):
+    def make_canvas_plot(self, plot_type):
         column = self.find_clicked_button()
         for i in reversed(range(self.ui.layout_plots.count())):
             self.ui.layout_plots.itemAt(i).widget().deleteLater()
@@ -50,5 +56,6 @@ class AnalysisWindow():
                                     height=4,
                                     dpi=100,
                                     column=column,
-                                    plot_type='histogram')
+                                    plot_type=self.plot_type,
+                                    group_by='Sample Type')  # TODO redo
         self.ui.layout_plots.addWidget(self.sc)

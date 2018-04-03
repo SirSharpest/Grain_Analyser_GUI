@@ -32,13 +32,3 @@ class MatplotlibCanvasView():
     def get_radio_buttons(self):
         # Returns a dict of the radio buttons created
         return self.buttons
-
-    def create_canvas(self):
-        sc = MyStaticMplCanvas(self.parent_layout,
-                               df=self.df,
-                               width=5,
-                               height=4,
-                               dpi=100,
-                               plot_type='histogram')
-
-        self.plot_layout.addWidget(sc)

@@ -199,11 +199,25 @@
           <string>Analysis</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="0">
+          <item row="2" column="0">
            <layout class="QGridLayout" name="layout_plots"/>
           </item>
-          <item row="0" column="0">
+          <item row="1" column="0">
            <layout class="QGridLayout" name="layout_plot_settings"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QComboBox" name="cb_graph_type">
+            <item>
+             <property name="text">
+              <string>Histogram</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Boxplot</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </widget>
