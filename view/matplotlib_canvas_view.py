@@ -31,13 +31,14 @@ class MatplotlibCanvasView():
             self.settings_layout.addWidget(
                 self.buttons[c], offset_num % 2, offset_num // 2)
 
-        if self.plot_type == 'boxplot':
-            self.cb_group_by = QComboBox()
-            [self.cb_group_by.addItem(x)
-             for x in self.find_candidates_for_box_plots(self.df)]
-            self.settings_layout.addWidget(self.cb_group_by, 2, 0)
+        self.cb_group_by = QComboBox()
+        if self.plot_type == 'histogram':
+            self.cb_group_by.addItem('None')
+        [self.cb_group_by.addItem(x)
+         for x in self.find_candidates_for_grouping(self.df)]
+        self.settings_layout.addWidget(self.cb_group_by, 2, 0)
 
-    def find_candidates_for_box_plots(self, df):
+    def find_candidates_for_grouping(self, df):
         lst = []
         for c in df.columns:
             if len(df[c].unique()) < 30:

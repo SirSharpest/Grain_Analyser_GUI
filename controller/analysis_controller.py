@@ -45,9 +45,7 @@ class AnalysisWindow():
             v.toggled.connect(self.make_canvas_plot)
         self.make_canvas_plot(self.plot_type)
 
-        if self.plot_type == 'boxplot':
-            self.view.get_cb_group_by().currentTextChanged.connect(
-                self.make_canvas_plot)
+        self.view.get_cb_group_by().currentTextChanged.connect(self.make_canvas_plot)
 
     def find_clicked_button(self):
         for k, v in self.view.get_radio_buttons().items():
@@ -56,10 +54,7 @@ class AnalysisWindow():
         return 'volume'
 
     def get_group_by(self):
-        if self.plot_type == 'boxplot':
-            return self.view.get_cb_group_by().currentText()
-        else:
-            return 'Sample Type'
+        return self.view.get_cb_group_by().currentText()
 
     def make_canvas_plot(self, plot_type):
         column = self.find_clicked_button()
