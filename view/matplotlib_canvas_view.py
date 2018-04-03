@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QRadioButton
 from matplotlib_canvas_model import MyStaticMplCanvas
+from pandas.api.types import is_numeric_dtype
 
 
 class MatplotlibCanvasView():
@@ -12,15 +13,21 @@ class MatplotlibCanvasView():
         self.parent_layout = parent_layout
         self.settings_layout = settings_layout
         self.buttons = {}
+        offset = 0
         for idx, c in enumerate(df.columns):
             tmp_btn = QRadioButton(c)
-            if idx == 0:
+            if len(self.buttons) == 0:
                 tmp_btn.setChecked(True)
             else:
                 tmp_btn.setChecked(False)
+            if not is_numeric_dtype(df[c]):
+                offset = offset + 1
+                continue
             tmp_btn.column = c
             self.buttons[c] = tmp_btn
-            self.settings_layout.addWidget(self.buttons[c], idx % 2, idx // 2)
+            offset_num = idx - offset
+            self.settings_layout.addWidget(
+                self.buttons[c], offset_num % 2, offset_num // 2)
 
     def get_radio_buttons(self):
         # Returns a dict of the radio buttons created

@@ -25,6 +25,9 @@ class PreProcessWindow():
         try:
             finfo = self.ui.expinfo.text()
             self.window.get_data().get_spike_info(finfo)
+            QMessageBox.warning(self.window, "Success",
+                                "Additional Data Loaded")
+
         except (ValueError, NoDataFoundException):
             QMessageBox.warning(self.window, "Whoops",
                                 "That data is not matching with loaded data")

@@ -37,7 +37,6 @@ class FindFilesWindow():
                 self.ui.btn_to_csv.setEnabled(True)
                 self.ui.tab_preprocess.setEnabled(True)
                 self.ui.tab_analysis.setEnabled(True)
-                self.window.analysis_controller.enable(self.window.get_data())
                 self.set_files_list()
         except TypeError as e:
             QMessageBox.warning(self.window, "Finding Files Error",

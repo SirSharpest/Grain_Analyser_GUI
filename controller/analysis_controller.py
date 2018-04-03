@@ -12,7 +12,6 @@ class AnalysisWindow():
         pass
 
     def enable(self, data):
-        self.update_data(data)
         self.view = view(
             self.window.get_data().get_data(),
             self.ui.tab_analysis,
@@ -29,10 +28,6 @@ class AnalysisWindow():
         for i in reversed(range(self.ui.layout_plot_settings.count())):
             self.ui.layout_plot_settings.itemAt(i).widget().setParent(None)
         self.enable(data)
-
-    def update_data(self, data):
-
-        self.window.set_data(data)
 
     def setup_figure_canvas(self):
         for k, v in self.view.get_radio_buttons().items():
