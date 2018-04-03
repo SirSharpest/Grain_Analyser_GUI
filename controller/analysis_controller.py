@@ -12,17 +12,21 @@ class AnalysisWindow():
 
     def set_graph_type(self):
         self.plot_type = str(self.ui.cb_graph_type.currentText()).lower()
+        self.update_view(self.window.get_data())
         self.make_canvas_plot(self.plot_type)
 
     def setup_default_states(self):
         pass
 
     def refresh(self, data):
+        print('creating view')
         self.view = view(
             self.window.get_data().get_data(),
             self.ui.tab_analysis,
             self.ui.layout_plots,
-            self.ui.layout_plot_settings)
+            self.ui.layout_plot_settings,
+            self.plot_type)
+        print('view created')
         self.setup_figure_canvas()
 
     def update_view(self, data):
@@ -33,6 +37,7 @@ class AnalysisWindow():
         """
         for i in reversed(range(self.ui.layout_plot_settings.count())):
             self.ui.layout_plot_settings.itemAt(i).widget().setParent(None)
+
         self.refresh(data)
 
     def setup_figure_canvas(self):
@@ -40,11 +45,21 @@ class AnalysisWindow():
             v.toggled.connect(self.make_canvas_plot)
         self.make_canvas_plot(self.plot_type)
 
+        if self.plot_type == 'boxplot':
+            self.view.get_cb_group_by().currentTextChanged.connect(
+                self.make_canvas_plot)
+
     def find_clicked_button(self):
         for k, v in self.view.get_radio_buttons().items():
             if v.isChecked():
                 return v.column
         return 'volume'
+
+    def get_group_by(self):
+        if self.plot_type == 'boxplot':
+            return self.view.get_cb_group_by().currentText()
+        else:
+            return 'Sample Type'
 
     def make_canvas_plot(self, plot_type):
         column = self.find_clicked_button()
@@ -58,5 +73,5 @@ class AnalysisWindow():
                                     dpi=100,
                                     column=column,
                                     plot_type=self.plot_type,
-                                    group_by='Sample Type')  # TODO redo
+                                    group_by=self.get_group_by())
         self.ui.layout_plots.addWidget(self.sc)

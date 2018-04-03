@@ -42,6 +42,7 @@ class MyStaticMplCanvas(MyMplCanvas):
 
     def compute_initial_figure(self, axes, df):
         try:
+            print('Trying to make figure')
             if self.plot_type == 'histogram':
                 sns.distplot(df[self.column], ax=self.axes, kde=False)
             elif self.plot_type == 'boxplot':
