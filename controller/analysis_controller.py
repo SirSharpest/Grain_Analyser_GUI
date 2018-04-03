@@ -51,6 +51,7 @@ class AnalysisWindow():
         for i in reversed(range(self.ui.layout_plots.count())):
             self.ui.layout_plots.itemAt(i).widget().deleteLater()
         self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
+                                    self.window,
                                     self.window.get_data().get_data(),
                                     width=5,
                                     height=4,

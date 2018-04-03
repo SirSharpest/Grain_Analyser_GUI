@@ -16,10 +16,11 @@ import seaborn as sns
 class MyMplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 
-    def __init__(self, parent=None, df=None,
+    def __init__(self, parent=None, window=None, df=None,
                  column=None, width=5, height=4,
                  dpi=100, plot_type=None, group_by=None):
         fig = Figure(figsize=(width, height), dpi=dpi)
+        self.window = window
         self.axes = fig.add_subplot(111)
         self.plot_type = plot_type
         self.group_by = group_by
