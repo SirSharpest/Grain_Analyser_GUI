@@ -51,7 +51,8 @@ class MyMplCanvas(FigureCanvas):
             col_wrap = None
         g = sns.FacetGrid(df, hue=group_by, col=group_by,
                           col_wrap=col_wrap)
-        g = g.map(sns.distplot, column, kde=False)
+        g = g.map(sns.distplot, column, kde=False,
+                  hist_kws=dict(edgecolor="k", linewidth=2))
         return g.fig
 
     def compute_initial_figure(self, axes, df):
@@ -66,7 +67,7 @@ class MyStaticMplCanvas(MyMplCanvas):
             print('Trying to make figure')
             if self.plot_type == 'histogram':
                 sns.distplot(df[self.column], ax=self.axes,
-                             kde=False)
+                             kde=False, hist_kws=dict(edgecolor="k", linewidth=2))
             elif self.plot_type == 'boxplot':
                 sns.boxplot(data=df, x=self.column,
                             y=self.group_by, ax=self.axes)

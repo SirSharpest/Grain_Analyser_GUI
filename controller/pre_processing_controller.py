@@ -38,7 +38,8 @@ class PreProcessWindow():
         # TODO add in features for this
 
         self.window.get_data().fix_colnames()
-        self.window.get_data().clean_data()
+        self.window.get_data().clean_data(
+            remove_small=remove_small, remove_large=remove_large)
 
         QMessageBox.warning(self.window, "Success",
                             "Data Cleaned")
