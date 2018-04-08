@@ -1,5 +1,5 @@
 from matplotlib_canvas_model import MyStaticMplCanvas
-from matplotlib_canvas_view import MatplotlibCanvasView as view
+from matplotlib_canvas_view import AnalysisWindowView as view
 
 
 class AnalysisWindow():

@@ -4,8 +4,13 @@ from pandas.api.types import is_numeric_dtype
 import numpy as np
 
 
-class MatplotlibCanvasView():
-    def __init__(self, df, parent_layout, plot_layout, settings_layout, plot_type):
+class AnalysisWindowView():
+    def __init__(self,
+                 df,
+                 parent_layout,
+                 plot_layout,
+                 settings_layout,
+                 plot_type):
         """
         Given a dataframe and a layout spec
         this class populates appropriate radio button functionality
@@ -37,6 +42,43 @@ class MatplotlibCanvasView():
         [self.cb_group_by.addItem(x)
          for x in self.find_candidates_for_grouping(self.df)]
         self.settings_layout.addWidget(self.cb_group_by, 2, 0)
+
+    def find_candidates_for_grouping(self, df):
+        lst = []
+        for c in df.columns:
+            if len(df[c].unique()) < 30:
+                if not is_numeric_dtype(df[c]):
+                    lst.append(c)
+        return lst
+
+    def get_cb_group_by(self):
+        return self.cb_group_by
+
+    def get_radio_buttons(self):
+        # Returns a dict of the radio buttons created
+        return self.buttons
+
+
+class TestWindowView():
+    def __init__(self,
+                 df,
+                 ui,
+                 plot_type):
+        """
+        Given a dataframe and a layout spec
+        this class populates appropriate radio button functionality
+        """
+        self.df = df
+        self.ui = ui
+        self.plot_type = plot_type
+
+        # Line up attributes
+        self.ui.cb_test_attribute.addItems(list(
+            filter(lambda x: is_numeric_dtype(df[x]), df.columns)))
+
+        # Find groups
+        self.ui.cb_test_grouping.addItems(
+            self.find_candidates_for_grouping(self.df))
 
     def find_candidates_for_grouping(self, df):
         lst = []
