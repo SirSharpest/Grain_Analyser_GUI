@@ -87,10 +87,3 @@ class TestWindowView():
                 if not is_numeric_dtype(df[c]):
                     lst.append(c)
         return lst
-
-    def get_cb_group_by(self):
-        return self.cb_group_by
-
-    def get_radio_buttons(self):
-        # Returns a dict of the radio buttons created
-        return self.buttons

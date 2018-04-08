@@ -46,7 +46,15 @@ class StatsTestWindow():
         self.make_canvas_plot(self.plot_type)
 
     def get_group_by(self):
-        return self.view.get_cb_group_by().currentText()
+        return self.ui.cb_test_grouping.currentText()
+
+    def slice_data(self):
+        data = self.window.get_data().get_data()[(
+            self.window.get_data().get_data()[self.get_group_by()]
+            == self.ui.cb_test_g1.currentText()) | (
+            self.window.get_data().get_data()[self.get_group_by()]
+                == self.ui.cb_test_g2.currentText())]
+        return data
 
     def make_canvas_plot(self, plot_type):
         # delete old plot
@@ -56,9 +64,10 @@ class StatsTestWindow():
         column = self.ui.cb_test_attribute.currentText()
         for i in reversed(range(self.ui.layout_plots.count())):
             self.ui.layout_plots.itemAt(i).widget().deleteLater()
+
         self.sc = MyStaticMplCanvas(self.ui.tab_testing,
                                     self.window,
-                                    self.window.get_data().get_data(),  # This will need altered
+                                    self.slice_data(),
                                     width=5,
                                     height=4,
                                     dpi=100,
