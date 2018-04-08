@@ -26,7 +26,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_load">
          <attribute name="title">
@@ -199,8 +199,12 @@
           <string>Analysis</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="2" column="0">
-           <layout class="QGridLayout" name="layout_plots"/>
+          <item row="3" column="0">
+           <layout class="QGridLayout" name="layout_plots">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
+           </layout>
           </item>
           <item row="1" column="0">
            <layout class="QGridLayout" name="layout_plot_settings"/>
@@ -221,6 +225,68 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_testing">
+         <attribute name="title">
+          <string>Statistical Testing</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="2" column="0">
+           <layout class="QGridLayout" name="layout_test_plots">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Group By</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cb_test_attribute"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Attribute to Test</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QRadioButton" name="rbtn_ttest">
+              <property name="text">
+               <string>T-Test</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cb_test_grouping"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="QRadioButton" name="rbtn_bayes">
+              <property name="text">
+               <string>Bayes Test</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QPushButton" name="btn_test">
+              <property name="text">
+               <string>Test</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QGridLayout" name="layout_test_groups"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -234,7 +300,7 @@
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

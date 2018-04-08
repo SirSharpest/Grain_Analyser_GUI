@@ -42,7 +42,8 @@ class MatplotlibCanvasView():
         lst = []
         for c in df.columns:
             if len(df[c].unique()) < 30:
-                lst.append(c)
+                if not is_numeric_dtype(df[c]):
+                    lst.append(c)
         return lst
 
     def get_cb_group_by(self):

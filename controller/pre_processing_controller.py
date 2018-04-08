@@ -18,7 +18,9 @@ class PreProcessWindow():
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         info, _ = QFileDialog.getOpenFileName(
-            self.window, "QFileDialog.getOpenFileName()", "", "Excel Files (*.xlsx)", options=options)
+            self.window,
+            "QFileDialog.getOpenFileName()", "", "Excel Files (*.xlsx)",
+            options=options)
         self.ui.expinfo.setText(info)
 
     def load_experimental_data(self):
@@ -27,6 +29,8 @@ class PreProcessWindow():
             self.window.get_data().get_spike_info(finfo)
             QMessageBox.warning(self.window, "Success",
                                 "Additional Data Loaded")
+            # When extra data is loaded then we can do more with it!
+            self.ui.tab_testing.setEnabled(True)
 
         except (ValueError, NoDataFoundException):
             QMessageBox.warning(self.window, "Whoops",
@@ -35,7 +39,6 @@ class PreProcessWindow():
     def clean_data(self):
         remove_large = self.ui.chk_large.isChecked()
         remove_small = self.ui.chk_small.isChecked()
-        # TODO add in features for this
 
         self.window.get_data().fix_colnames()
         self.window.get_data().clean_data(

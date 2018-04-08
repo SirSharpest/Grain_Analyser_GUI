@@ -3,6 +3,7 @@ from PyQt5 import QtGui
 from analysis_controller import AnalysisWindow
 from load_data_controller import FindFilesWindow
 from pre_processing_controller import PreProcessWindow
+from stats_test_controller import StatsTestWindow
 from main_view import Ui_MainWindow
 from data_view import Ui_DataWindow
 from pandas_model import PandasModel
@@ -31,6 +32,8 @@ class AppWindow(QMainWindow):
         self.analysis_controller = AnalysisWindow(self, self.ui)
         self.ui.master_tab.currentChanged.connect(self.update_analysis_view)
         self.pre_process_controller = PreProcessWindow(self, self.ui)
+        self.stats_test_controller = StatsTestWindow(self, self.ui)
+
         # Set GUI icon for beautification
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
 
@@ -50,6 +53,7 @@ class AppWindow(QMainWindow):
         # Set the other tabs to disabled when no data is loaded
         self.ui.tab_preprocess.setEnabled(False)
         self.ui.tab_analysis.setEnabled(False)
+        self.ui.tab_testing.setEnabled(False)
 
     def view_data(self):
         self.data_view = DataWindow(self.data.get_data())
@@ -62,8 +66,7 @@ class AppWindow(QMainWindow):
         self.data = data
 
     def update_analysis_view(self, tab):
-        # tab 2 is the analysis window
-        if tab is not 2:
-            return 0
-        else:
+        if tab is 2:
             self.analysis_controller.update_view(self.data)
+        elif tab is 3:
+            self.stats_test_controller.update_view(self.data)

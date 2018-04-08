@@ -1,27 +1,36 @@
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from matplotlib_canvas_model import MyStaticMplCanvas
 from matplotlib_canvas_view import MatplotlibCanvasView as view
 
-
-class AnalysisWindow():
+class StatsTestWindow():
     def __init__(self, window, ui):
-        self.ui = ui
         self.window = window
-        self.view = None
-        self.plot_type = 'histogram'
-        self.ui.cb_graph_type.currentTextChanged.connect(self.set_graph_type)
+        self.ui = ui
+        self.connect_view_functions()
+        self.plot_type = "box"
 
-    def set_graph_type(self):
-        self.plot_type = str(self.ui.cb_graph_type.currentText()).lower()
-        self.update_view(self.window.get_data())
-        self.make_canvas_plot(self.plot_type)
+    def connect_view_functions(self):
+        self.ui.cb_test_attribute.textChanged.connect(self.set_attribute)
+        self.ui.cb_test_grouping.textChanged.connect(self.set_group_by)
+        self.ui.rbtn_bayes.toggled.connect(self.set_test_type)
+        self.ui.rbtn_ttest.toggled.connect(self.set_test_type)
 
+    def set_test_type(self):
+        pass
+
+    def set_attribute(self):
+        pass
+
+    def set_group_by(self):
+        pass
+    
     def refresh(self, data):
         print('creating view')
         self.view = view(
             self.window.get_data().get_data(),
-            self.ui.tab_analysis,
-            self.ui.layout_plots,
-            self.ui.layout_plot_settings,
+            self.ui.tab_testing,
+            self.ui.layout_test_plots,
+            self.ui.layout_test_groups,
             self.plot_type)
         print('view created')
         self.setup_figure_canvas()
@@ -58,7 +67,7 @@ class AnalysisWindow():
             self.ui.layout_plots.itemAt(i).widget().deleteLater()
         self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
                                     self.window,
-                                    self.window.get_data().get_data(),
+                                    self.window.get_data().get_data(), # This will need altered
                                     width=5,
                                     height=4,
                                     dpi=100,
