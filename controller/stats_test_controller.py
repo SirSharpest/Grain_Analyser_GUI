@@ -9,6 +9,7 @@ class StatsTestWindow():
         self.ui = ui
         self.connect_view_functions()
         self.plot_type = "boxplot"
+        self.ui.rbtn_ttest.setChecked(True)
 
     def connect_view_functions(self):
         self.ui.cb_test_grouping.currentTextChanged.connect(self.set_group_by)
@@ -17,7 +18,7 @@ class StatsTestWindow():
         self.ui.btn_test.clicked.connect(self.setup_figure_canvas)
 
     def set_test_type(self):
-        pass
+        self.plot_type = "boxplot" if self.ui.rbtn_ttest.isChecked() else "bayes"
 
     def set_group_by(self):
         # When grouping is changed then we need to update options
@@ -43,7 +44,11 @@ class StatsTestWindow():
         self.refresh(data)
 
     def setup_figure_canvas(self):
-        self.make_canvas_plot(self.plot_type)
+        if self.ui.cb_test_g1.currentText() == self.ui.cb_test_g2.currentText():
+            QMessageBox.warning(self.window, "Same data warning",
+                                "Data you've selected are identical!")
+        else:
+            self.make_canvas_plot(self.plot_type)
 
     def get_group_by(self):
         return self.ui.cb_test_grouping.currentText()
@@ -73,5 +78,6 @@ class StatsTestWindow():
                                     dpi=100,
                                     column=column,
                                     plot_type=self.plot_type,
-                                    group_by=self.ui.cb_test_grouping.currentText())
+                                    group_by=self.ui.cb_test_grouping.currentText(),
+                                    ttest=True)
         self.ui.layout_test_plots.addWidget(self.sc)
