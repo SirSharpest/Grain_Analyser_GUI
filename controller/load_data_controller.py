@@ -38,6 +38,7 @@ class FindFilesWindow():
                 self.ui.tab_preprocess.setEnabled(True)
                 self.ui.tab_analysis.setEnabled(True)
                 self.set_files_list()
+                self.ui.lbl_status.setText('Data loaded!')
         except TypeError as e:
             QMessageBox.warning(self.window, "Finding Files Error",
                                 "Couldn't find files in given location")

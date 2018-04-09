@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog
 from ct_analysing_library.ct_data import NoDataFoundException
 
 
@@ -27,14 +27,11 @@ class PreProcessWindow():
         try:
             finfo = self.ui.expinfo.text()
             self.window.get_data().get_spike_info(finfo)
-            QMessageBox.warning(self.window, "Success",
-                                "Additional Data Loaded")
             # When extra data is loaded then we can do more with it!
             self.ui.tab_testing.setEnabled(True)
-
+            self.ui.lbl_status.setText('Additional Data loaded!')
         except (ValueError, NoDataFoundException):
-            QMessageBox.warning(self.window, "Whoops",
-                                "That data is not matching with loaded data")
+            self.ui.lbl_status.setText('DATA NOT FOUND!')
 
     def clean_data(self):
         remove_large = self.ui.chk_large.isChecked()
@@ -44,5 +41,5 @@ class PreProcessWindow():
         self.window.get_data().clean_data(
             remove_small=remove_small, remove_large=remove_large)
 
-        QMessageBox.warning(self.window, "Success",
-                            "Data Cleaned")
+        self.ui.lbl_status.setText(
+            'Data cleaned! * Additional clicks will remove more data')

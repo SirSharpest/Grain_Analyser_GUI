@@ -1,4 +1,5 @@
 import sys
+import inspect
 import pytest
 sys.path.append("./model/")
 sys.path.append("./controller/")
@@ -8,12 +9,24 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore
 from PyQt5 import QtTest
 import time
-from pytestqt import qtbot
 
 
-def test_startup(qtbot):
+DATA_FOLDER = 'Testing/Test_Data/'
+EXTRA_INFO = 'Testing/Test_Files/extra_information.xlsx'
+
+
+@pytest.fixture
+def app_and_window():
     app = QApplication(sys.argv)
     w = AppWindow()
     w.show()
-    QtTest.QTest.mouseClick(w.ui.btn_find_files, QtCore.Qt.LeftButton)
-    time.sleep(5)
+    return (app, w)
+
+
+def take_screenshot(fname, window):
+    p = window.grab()
+    p.save('./Testing/Screenshots/{0}'.format(fname))
+
+
+def test_startup(app_and_window):
+    app_and_window[0].quit()

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -169,12 +169,16 @@ class Ui_MainWindow(object):
         self.master_tab.addTab(self.tab_testing, "")
         self.verticalLayout.addWidget(self.master_tab)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.lbl_status = QtWidgets.QLabel(self.centralwidget)
+        self.lbl_status.setText("")
+        self.lbl_status.setObjectName("lbl_status")
+        self.gridLayout.addWidget(self.lbl_status, 1, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 25))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 722, 23))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
