@@ -71,7 +71,8 @@ class TestWindowView():
         self.df = df
         self.ui = ui
         self.plot_type = plot_type
-
+        self.ui.cb_test_grouping.clear()
+        self.ui.cb_test_attribute.clear()
         # Line up attributes
         self.ui.cb_test_attribute.addItems(list(
             filter(lambda x: is_numeric_dtype(df[x]), df.columns)))

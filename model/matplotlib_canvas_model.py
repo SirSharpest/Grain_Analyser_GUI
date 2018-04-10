@@ -68,7 +68,6 @@ class MyStaticMplCanvas(MyMplCanvas):
 
     def compute_initial_figure(self, axes, df):
         try:
-            print('Trying to make figure')
             if self.plot_type == 'histogram':
                 sns.distplot(df[self.column], ax=self.axes,
                              kde=False, hist_kws=dict(edgecolor="k", linewidth=2))
@@ -79,25 +78,34 @@ class MyStaticMplCanvas(MyMplCanvas):
                 if self.ttest:
                     u = list(df[self.group_by].unique())
                     s1 = df[df[self.group_by] == u[0]][self.column]
-                    s2 = df[df[self.group_by] == u[1]][self.column]
+                    try:
+                        s2 = df[df[self.group_by] == u[1]][self.column]
+                    except IndexError:
+                        s2 = s1
                     p = perform_t_test(s1, s2)
                     self.fig.suptitle('P-value of {0}'.format(p))
 
             elif self.plot_type == 'bayes':
                 u = list(df[self.group_by].unique())
                 s1 = np.array(df[df[self.group_by] == u[0]][self.column])
-                s2 = np.array(df[df[self.group_by] == u[1]][self.column])
-                trace, x = baysian_hypothesis_test(s1, s2, u[0], u[1])
-                plot_difference_of_means(trace, ax=self.axes)
+                try:
+                    s2 = np.array(df[df[self.group_by] == u[1]][self.column])
+                    trace, x = baysian_hypothesis_test(s1, s2, u[0], u[1])
+                    plot_difference_of_means(trace, ax=self.axes)
+                except IndexError:
+                    trace, x = baysian_hypothesis_test(
+                        s1, s1, u[0], "Duplicate")
+                    plot_difference_of_means(trace, ax=self.axes)
+                except ValueError:
+                    trace, x = baysian_hypothesis_test(
+                        s1, s1, u[0], "Duplicate")
+                    plot_difference_of_means(trace, ax=self.axes)
             else:
                 t = arange(0.0, 3.0, 0.01)
                 s = sin(2 * pi * t)
                 self.axes.plot(t, s)
             self.fig.tight_layout()
-        except ValueError:
-            print('Column:\t{0} is giving problems'.format(self.column))
-            print('\nHelp! NaN Imma just make a volume plot\n')
-            QMessageBox.warning(self.window, "Error",
-                                "Data looks bad, try cleaning first")
+        except ValueError as e:
+            print(e)
         except TypeError as e:
-            print('\nBad comparison types in column:\t{0}'.format(self.column))
+            print(e)

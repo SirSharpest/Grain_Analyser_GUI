@@ -16,14 +16,12 @@ class AnalysisWindow():
         self.make_canvas_plot()
 
     def refresh(self):
-        print('creating view')
         self.view = view(
             self.window.get_data().get_data(),
             self.ui.tab_analysis,
             self.ui.layout_plots,
             self.ui.layout_plot_settings,
             self.plot_type)
-        print('view created')
         self.setup_figure_canvas()
 
     def update_view(self):

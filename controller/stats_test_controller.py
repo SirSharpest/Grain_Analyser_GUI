@@ -29,26 +29,23 @@ class StatsTestWindow():
         self.ui.cb_test_g1.addItems(groups)
         self.ui.cb_test_g2.addItems(groups)
 
-    def refresh(self, data):
-        self.view = view(
-            self.window.get_data().get_data(),
-            self.ui,
-            self.plot_type)
-
-    def update_view(self, data):
+    def update_view(self):
         """
         Attach this function to tab onclick
         then when the data changes we can create a new view
         with any changes to the columns!
         """
-        self.refresh(data)
+        self.view = view(
+            self.window.get_data().get_data(),
+            self.ui,
+            self.plot_type)
+        self.make_canvas_plot(self.plot_type)
 
     def setup_figure_canvas(self):
         if self.ui.cb_test_g1.currentText() == self.ui.cb_test_g2.currentText():
-            QMessageBox.warning(self.window, "Same data warning",
-                                "Data you've selected are identical!")
-        else:
-            self.make_canvas_plot(self.plot_type)
+            self.ui.lbl_status.setText(
+                'Warning identical data to be compared!')
+        self.make_canvas_plot(self.plot_type)
 
     def get_group_by(self):
         return self.ui.cb_test_grouping.currentText()
@@ -64,11 +61,8 @@ class StatsTestWindow():
     def make_canvas_plot(self, plot_type):
         # delete old plot
         for i in reversed(range(self.ui.layout_test_plots.count())):
-            self.ui.layout_test_plots.itemAt(i).widget().deleteLater()
-
+            self.ui.layout_test_plots.itemAt(i).widget().setParent(None)
         column = self.ui.cb_test_attribute.currentText()
-        for i in reversed(range(self.ui.layout_plots.count())):
-            self.ui.layout_plots.itemAt(i).widget().deleteLater()
 
         self.sc = MyStaticMplCanvas(self.ui.tab_testing,
                                     self.window,

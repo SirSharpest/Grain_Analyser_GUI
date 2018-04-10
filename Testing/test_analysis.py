@@ -7,7 +7,6 @@ from test_GUI import app_and_window, DATA_FOLDER, EXTRA_INFO, take_screenshot
 from PyQt5.QtWidgets import QApplication
 from gui_controller import AppWindow
 from PyQt5.QtCore import Qt
-from time import sleep
 
 
 @pytest.fixture
