@@ -12,10 +12,10 @@ class AnalysisWindow():
 
     def set_graph_type(self):
         self.plot_type = str(self.ui.cb_graph_type.currentText()).lower()
-        self.update_view(self.window.get_data())
-        self.make_canvas_plot(self.plot_type)
+        self.update_view()
+        self.make_canvas_plot()
 
-    def refresh(self, data):
+    def refresh(self):
         print('creating view')
         self.view = view(
             self.window.get_data().get_data(),
@@ -26,7 +26,7 @@ class AnalysisWindow():
         print('view created')
         self.setup_figure_canvas()
 
-    def update_view(self, data):
+    def update_view(self):
         """
         Attach this function to tab onclick
         then when the data changes we can create a new view
@@ -34,13 +34,12 @@ class AnalysisWindow():
         """
         for i in reversed(range(self.ui.layout_plot_settings.count())):
             self.ui.layout_plot_settings.itemAt(i).widget().setParent(None)
-        self.refresh(data)
+        self.refresh()
 
     def setup_figure_canvas(self):
         for k, v in self.view.get_radio_buttons().items():
             v.toggled.connect(self.make_canvas_plot)
-        self.make_canvas_plot(self.plot_type)
-
+        self.make_canvas_plot()
         self.view.get_cb_group_by().currentTextChanged.connect(self.make_canvas_plot)
 
     def find_clicked_button(self):
@@ -52,10 +51,10 @@ class AnalysisWindow():
     def get_group_by(self):
         return self.view.get_cb_group_by().currentText()
 
-    def make_canvas_plot(self, plot_type):
+    def make_canvas_plot(self):
         column = self.find_clicked_button()
         for i in reversed(range(self.ui.layout_plots.count())):
-            self.ui.layout_plots.itemAt(i).widget().deleteLater()
+            self.ui.layout_plots.itemAt(i).widget().setParent(None)
         self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
                                     self.window,
                                     self.window.get_data().get_data(),

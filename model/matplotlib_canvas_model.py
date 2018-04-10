@@ -56,6 +56,7 @@ class MyMplCanvas(FigureCanvas):
                           col_wrap=col_wrap)
         g = g.map(sns.distplot, column, kde=False,
                   hist_kws=dict(edgecolor="k", linewidth=2))
+        g.fig.tight_layout()
         return g.fig
 
     def compute_initial_figure(self, axes, df):
@@ -92,6 +93,7 @@ class MyStaticMplCanvas(MyMplCanvas):
                 t = arange(0.0, 3.0, 0.01)
                 s = sin(2 * pi * t)
                 self.axes.plot(t, s)
+            self.fig.tight_layout()
         except ValueError:
             print('Column:\t{0} is giving problems'.format(self.column))
             print('\nHelp! NaN Imma just make a volume plot\n')

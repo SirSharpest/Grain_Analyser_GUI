@@ -30,8 +30,9 @@ class PreProcessWindow():
             # When extra data is loaded then we can do more with it!
             self.ui.tab_testing.setEnabled(True)
             self.ui.lbl_status.setText('Additional Data loaded!')
-        except (ValueError, NoDataFoundException):
+        except (ValueError, NoDataFoundException, FileNotFoundError):
             self.ui.lbl_status.setText('DATA NOT FOUND!')
+            raise FileNotFoundError
 
     def clean_data(self):
         remove_large = self.ui.chk_large.isChecked()

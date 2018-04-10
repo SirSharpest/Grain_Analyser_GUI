@@ -67,6 +67,6 @@ class AppWindow(QMainWindow):
 
     def update_analysis_view(self, tab):
         if tab is 2:
-            self.analysis_controller.update_view(self.data)
+            self.analysis_controller.update_view()
         elif tab is 3:
             self.stats_test_controller.update_view(self.data)

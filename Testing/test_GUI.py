@@ -19,8 +19,9 @@ EXTRA_INFO = 'Testing/Test_Files/extra_information.xlsx'
 def app_and_window():
     app = QApplication(sys.argv)
     w = AppWindow()
-    w.show()
-    return (app, w)
+    w.showMaximized()
+    yield (app, w)
+    app.quit()
 
 
 def take_screenshot(fname, window):
@@ -29,4 +30,5 @@ def take_screenshot(fname, window):
 
 
 def test_startup(app_and_window):
-    app_and_window[0].quit()
+    print('running fixture')
+    print('exiting fixture')
