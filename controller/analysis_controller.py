@@ -37,8 +37,8 @@ class AnalysisWindow():
     def setup_figure_canvas(self):
         for k, v in self.view.get_radio_buttons().items():
             v.toggled.connect(self.make_canvas_plot)
-        self.make_canvas_plot()
         self.view.get_cb_group_by().currentTextChanged.connect(self.make_canvas_plot)
+        self.make_canvas_plot()
 
     def find_clicked_button(self):
         for k, v in self.view.get_radio_buttons().items():
@@ -51,6 +51,8 @@ class AnalysisWindow():
 
     def make_canvas_plot(self):
         column = self.find_clicked_button()
+        for i in reversed(range(self.ui.layout_plots.count())):
+            self.ui.layout_plots.itemAt(i).widget().deleteLater()
         for i in reversed(range(self.ui.layout_plots.count())):
             self.ui.layout_plots.itemAt(i).widget().setParent(None)
         self.sc = MyStaticMplCanvas(self.ui.tab_analysis,
