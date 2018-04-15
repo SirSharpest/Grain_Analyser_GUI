@@ -239,6 +239,19 @@
           </item>
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayout_6">
+            <item row="2" column="1">
+             <widget class="QComboBox" name="cb_test_g1"/>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="btn_test">
+              <property name="text">
+               <string>Test</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cb_test_attribute"/>
+            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_3">
               <property name="text">
@@ -246,13 +259,20 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="cb_test_attribute"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_2">
+            <item row="3" column="1">
+             <widget class="QRadioButton" name="rbtn_bayes">
               <property name="text">
-               <string>Attribute to Test</string>
+               <string>Bayes Test</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QComboBox" name="cb_test_g2"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Classes to test:</string>
               </property>
              </widget>
             </item>
@@ -266,32 +286,19 @@
             <item row="1" column="1">
              <widget class="QComboBox" name="cb_test_grouping"/>
             </item>
-            <item row="3" column="1">
-             <widget class="QRadioButton" name="rbtn_bayes">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>Bayes Test</string>
+               <string>Attribute to Test</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="2">
-             <widget class="QPushButton" name="btn_test">
+            <item row="4" column="0">
+             <widget class="QRadioButton" name="rbtn_welch">
               <property name="text">
-               <string>Test</string>
+               <string>Welch -T-Test</string>
               </property>
              </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Classes to test:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QComboBox" name="cb_test_g1"/>
-            </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="cb_test_g2"/>
             </item>
            </layout>
           </item>
@@ -329,6 +336,7 @@
     </property>
     <addaction name="actionSave_Data"/>
     <addaction name="actionQuit"/>
+    <addaction name="actionSave_Figure"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -352,6 +360,11 @@
   <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionSave_Figure">
+   <property name="text">
+    <string>Save Figure</string>
    </property>
   </action>
  </widget>

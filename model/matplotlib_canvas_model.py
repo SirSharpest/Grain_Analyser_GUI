@@ -72,7 +72,7 @@ class MyStaticMplCanvas(MyMplCanvas):
                 sns.distplot(df[self.column], ax=self.axes,
                              kde=False, hist_kws=dict(edgecolor="k", linewidth=2))
 
-            elif self.plot_type == 'boxplot':
+            elif self.plot_type == 'boxplot' or self.plot_type == 'welch':
                 sns.boxplot(data=df, x=self.column,
                             y=self.group_by, ax=self.axes)
                 if self.ttest:
@@ -82,7 +82,11 @@ class MyStaticMplCanvas(MyMplCanvas):
                         s2 = df[df[self.group_by] == u[1]][self.column]
                     except IndexError:
                         s2 = s1
-                    p = perform_t_test(s1, s2)
+                    if self.plot_type == 'welch':
+                        p = perform_t_test(s1, s2, equal_var=False)
+                    else:
+                        p = perform_t_test(s1, s2)
+
                     self.fig.suptitle('P-value of {0}'.format(p))
 
             elif self.plot_type == 'bayes':

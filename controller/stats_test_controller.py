@@ -15,10 +15,16 @@ class StatsTestWindow():
         self.ui.cb_test_grouping.currentTextChanged.connect(self.set_group_by)
         self.ui.rbtn_bayes.toggled.connect(self.set_test_type)
         self.ui.rbtn_ttest.toggled.connect(self.set_test_type)
+        self.ui.rbtn_welch.toggled.connect(self.set_test_type)
         self.ui.btn_test.clicked.connect(self.setup_figure_canvas)
 
     def set_test_type(self):
-        self.plot_type = "boxplot" if self.ui.rbtn_ttest.isChecked() else "bayes"
+        if self.ui.rbtn_ttest.isChecked():
+            self.plot_type = "boxplot"
+        elif self.ui.rbtn_bayes.isChecked():
+            self.plot_type = "bayes"
+        elif self.ui.rbtn_welch.isChecked():
+            self.plot_type = "welch"
 
     def set_group_by(self):
         # When grouping is changed then we need to update options
