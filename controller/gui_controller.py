@@ -34,6 +34,8 @@ class AppWindow(QMainWindow):
         self.pre_process_controller = PreProcessWindow(self, self.ui)
         self.stats_test_controller = StatsTestWindow(self, self.ui)
 
+        # Setup menu
+
         # Set GUI icon for beautification
         self.setWindowIcon(QtGui.QIcon('./images/logo.png'))
 

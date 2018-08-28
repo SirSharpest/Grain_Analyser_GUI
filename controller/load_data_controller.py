@@ -20,6 +20,7 @@ class FindFilesWindow():
         self.ui.btn_find_files.clicked.connect(self.search_for_files)
         self.ui.btn_load_data.clicked.connect(self.find_files)
         self.ui.btn_to_csv.clicked.connect(self.save_file_dialog)
+        self.ui.actionSave_Data.triggered.connect(self.save_file_dialog)
 
     def set_default_states(self):
         # This should be off by default
